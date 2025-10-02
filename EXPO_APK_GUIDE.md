@@ -21,23 +21,27 @@ Dự án này là **EXPO PROJECT**, không phải **bare React Native**!
 ### 🥇 **CÁCH 1: EAS BUILD (KHUYÊN DÙNG)**
 
 #### 📋 Bước 1: Cài đặt EAS CLI
+
 ```bash
 npm install -g @expo/cli
 npm install -g eas-cli
 ```
 
 #### 📋 Bước 2: Đăng nhập Expo
+
 ```bash
 expo login
 # Nhập username và password Expo
 ```
 
 #### 📋 Bước 3: Cấu hình EAS
+
 ```bash
 eas build:configure
 ```
 
 Lệnh này sẽ tạo file `eas.json`:
+
 ```json
 {
   "cli": {
@@ -67,15 +71,17 @@ Lệnh này sẽ tạo file `eas.json`:
 ```
 
 #### 📋 Bước 4: Build APK
+
 ```bash
 # Preview APK (để test)
 eas build --platform android --profile preview
 
-# Production APK  
+# Production APK
 eas build --platform android --profile production
 ```
 
 #### 📋 Bước 5: Tải APK về
+
 - Vào https://expo.dev/accounts/[username]/projects/[project-name]/builds
 - Tải file APK về máy
 - Cài đặt trên Android device
@@ -107,8 +113,9 @@ cd android
 ```
 
 #### 💭 **Khi nào eject?**
+
 - ✅ Cần native modules không có trong Expo
-- ✅ Cần custom native code  
+- ✅ Cần custom native code
 - ✅ Cần control hoàn toàn build process
 - ❌ Chỉ muốn tạo APK đơn giản
 
@@ -144,11 +151,13 @@ cd android
 ### 🔑 **Tạo Keystore cho Production**
 
 #### Tự động (khuyên dùng):
+
 ```bash
 eas credentials
 ```
 
 #### Thủ công:
+
 ```bash
 # Tạo keystore
 keytool -genkey -v -keystore my-upload-key.keystore \
@@ -161,6 +170,7 @@ eas credentials
 ### 📦 **Các Profile Build**
 
 #### 🧪 **Development Profile:**
+
 ```json
 "development": {
   "developmentClient": true,
@@ -172,6 +182,7 @@ eas credentials
 ```
 
 #### 🎯 **Preview Profile:**
+
 ```json
 "preview": {
   "distribution": "internal",
@@ -182,6 +193,7 @@ eas credentials
 ```
 
 #### 🚀 **Production Profile:**
+
 ```json
 "production": {
   "android": {
@@ -195,6 +207,7 @@ eas credentials
 ## 🛠️ SỬA LỖI REACT NATIVE CLI
 
 Lỗi ban đầu của bạn:
+
 ```
 ⚠️ react-native depends on @react-native-community/cli
 ```
@@ -207,7 +220,7 @@ Lỗi ban đầu của bạn:
 # Thay vì
 npx react-native run-android
 
-# Dùng  
+# Dùng
 expo start --android
 # hoặc
 npm run android
@@ -216,12 +229,14 @@ npm run android
 ### 📱 **Chạy trên Android với Expo:**
 
 #### Cách 1: Expo Go (dễ nhất)
+
 ```bash
 expo start
 # Scan QR code bằng Expo Go app
 ```
 
 #### Cách 2: Development Build
+
 ```bash
 eas build --profile development --platform android
 # Cài APK development build
@@ -229,6 +244,7 @@ eas build --profile development --platform android
 ```
 
 #### Cách 3: Android Emulator
+
 ```bash
 expo start --android
 # Tự động mở emulator và install
@@ -238,23 +254,25 @@ expo start --android
 
 ## 📊 SO SÁNH EXPO VS BARE REACT NATIVE
 
-| Tính năng | Expo | Bare React Native |
-|-----------|------|-------------------|
-| **Setup** | 🟢 Rất dễ | 🔴 Phức tạp |
-| **Build APK** | 🟢 EAS Build | 🔴 Cần setup keystore |
-| **Native Modules** | 🔴 Giới hạn | 🟢 Không giới hạn |
-| **Size APK** | 🔴 Lớn hơn | 🟢 Nhỏ hơn |
-| **OTA Updates** | 🟢 Built-in | 🔴 Cần setup |
-| **CI/CD** | 🟢 EAS Build | 🔴 Tự setup |
+| Tính năng          | Expo         | Bare React Native     |
+| ------------------ | ------------ | --------------------- |
+| **Setup**          | 🟢 Rất dễ    | 🔴 Phức tạp           |
+| **Build APK**      | 🟢 EAS Build | 🔴 Cần setup keystore |
+| **Native Modules** | 🔴 Giới hạn  | 🟢 Không giới hạn     |
+| **Size APK**       | 🔴 Lớn hơn   | 🟢 Nhỏ hơn            |
+| **OTA Updates**    | 🟢 Built-in  | 🔴 Cần setup          |
+| **CI/CD**          | 🟢 EAS Build | 🔴 Tự setup           |
 
 ---
 
 ## 🎯 QUYẾT ĐỊNH: NÊN DÙNG CÁCH NÀO?
 
 ### 🎯 **Cho dự án này (Demo):**
+
 **👍 Khuyên dùng EAS Build**
 
 **Lý do:**
+
 - ✅ Dự án đã là Expo → giữ nguyên
 - ✅ Demo đơn giản → không cần eject
 - ✅ EAS Build dễ setup
@@ -263,28 +281,33 @@ expo start --android
 ### 📋 **Các bước cụ thể:**
 
 #### Bước 1: Cài đặt tools
+
 ```bash
 npm install -g @expo/cli eas-cli
 ```
 
 #### Bước 2: Đăng nhập
+
 ```bash
 expo login
 ```
 
 #### Bước 3: Cấu hình
+
 ```bash
 eas build:configure
 ```
 
 #### Bước 4: Build APK
+
 ```bash
 eas build --platform android --profile preview
 ```
 
 #### Bước 5: Tải về và test
+
 - Vào expo.dev dashboard
-- Download APK  
+- Download APK
 - Install trên device
 
 ---
@@ -294,10 +317,11 @@ eas build --platform android --profile preview
 ### 🎤 **Script cho presenter:**
 
 > "Trong demo này, chúng ta đang dùng **Expo framework**. Expo làm cho việc tạo APK **đơn giản hơn rất nhiều** so với bare React Native.
-> 
+>
 > Thay vì phải setup Android SDK, keystore, gradle... chúng ta chỉ cần:
-> 1. **Một lệnh** `eas build`  
-> 2. **Chờ cloud build** 
+>
+> 1. **Một lệnh** `eas build`
+> 2. **Chờ cloud build**
 > 3. **Tải APK về**
 >
 > Đây là lý do tại sao nhiều developer chọn Expo cho các dự án không cần custom native code."
@@ -305,14 +329,17 @@ eas build --platform android --profile preview
 ### 🛠️ **Live Demo Steps:**
 
 1. **Show terminal error:**
+
    ```bash
    npx react-native run-android  # ❌ Lỗi
    ```
 
 2. **Explain why:**
+
    > "Lỗi này vì đây là Expo project, không phải bare React Native"
 
 3. **Show correct way:**
+
    ```bash
    expo start --android  # ✅ Đúng
    ```
@@ -326,16 +353,19 @@ eas build --platform android --profile preview
 ## 🚀 **KẾT LUẬN**
 
 ### ✅ **Cho Expo Projects:**
-- Dùng **EAS Build** 
+
+- Dùng **EAS Build**
 - Không cần setup Android SDK/keystore phức tạp
 - Build trên cloud, tải APK về
 
 ### ⚠️ **Lưu ý quan trọng:**
+
 - Expo có **size limit** cho APK
 - Một số **native modules** không support
 - **EAS Build** cần **internet** và **Expo account**
 
 ### 🎯 **Demo takeaway:**
+
 > "Expo giúp việc tạo APK **dễ dàng hơn**, nhưng đánh đổi **tính linh hoạt**. Chọn tool phù hợp với nhu cầu project!"
 
 **🎉 Bây giờ bạn đã hiểu cách tạo APK cho cả Expo và bare React Native!**

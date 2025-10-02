@@ -3,16 +3,18 @@
 ## 🤔 APK LÀ GÌ?
 
 ### 🍎 So sánh đơn giản:
+
 - **APK** = **A**ndroid **P**ackage **K**it
 - Giống như **hộp quà** chứa tất cả thứ cần thiết cho app
 - **iPhone** dùng file **.ipa**, **Android** dùng file **.apk**
 
 ### 📦 APK chứa gì?
+
 ```
 🗂️ File APK (giống hộp quà)
 ├── 💻 Code của app (Java/Kotlin)
 ├── 🖼️ Hình ảnh, icon
-├── 🎵 Âm thanh, video  
+├── 🎵 Âm thanh, video
 ├── 📋 Thông tin app (tên, version)
 ├── 🔐 Chữ ký số (để Android tin tướng)
 └── 📝 File cấu hình
@@ -23,6 +25,7 @@
 ## 🏗️ QUY TRÌNH TẠO APK (8 BƯỚC)
 
 ### 1️⃣ **Chuẩn Bị Môi Trường**
+
 ```bash
 # Kiểm tra Java
 java -version
@@ -35,11 +38,13 @@ npm install -g @react-native-community/cli
 ```
 
 **❌ Lỗi thường gặp:**
+
 ```
 ⚠️ react-native depends on @react-native-community/cli
 ```
 
 **✅ Cách sửa:**
+
 ```bash
 # Thêm vào package.json
 npm install --save-dev @react-native-community/cli@latest
@@ -48,11 +53,13 @@ npm install --save-dev @react-native-community/cli@latest
 ### 2️⃣ **Tạo Keystore (Chìa Khóa Ký)**
 
 #### 🔑 Keystore là gì?
+
 - Giống **chữ ký** của bạn
 - **Android** dùng để biết app này **thật** hay **giả**
 - **MẤT KEYSTORE = KHÔNG THỂ UPDATE APP**
 
 #### 📝 Lệnh tạo Keystore:
+
 ```bash
 keytool -genkeypair -v -storetype PKCS12 \
   -keystore my-upload-key.keystore \
@@ -63,25 +70,28 @@ keytool -genkeypair -v -storetype PKCS12 \
 ```
 
 #### 🎯 Giải thích từng phần:
+
 - `my-upload-key.keystore` = Tên file chìa khóa
-- `my-key-alias` = Biệt danh cho chìa khóa  
+- `my-key-alias` = Biệt danh cho chìa khóa
 - `RSA 2048` = Loại mã hóa (rất mạnh)
 - `10000 days` = Có hiệu lực 27 năm
 
 #### 💬 Hệ thống sẽ hỏi:
+
 ```
 Enter keystore password: [Nhập mật khẩu]
 Re-enter new password: [Nhập lại]
 What is your first and last name? [Tên của bạn]
 What is your organizational unit? [Tên công ty/trường]
 What is your city? [Thành phố]
-What is your state? [Tỉnh/Bang]  
+What is your state? [Tỉnh/Bang]
 What is your country code? [VN]
 ```
 
 ### 3️⃣ **Cấu Hình Gradle**
 
 #### 📂 File: `android/gradle.properties`
+
 ```properties
 # Thông tin Keystore (GIỮ BÍ MẬT!)
 MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore
@@ -96,10 +106,11 @@ org.gradle.jvmargs=-Xmx2048m
 ```
 
 #### 📂 File: `android/app/build.gradle`
+
 ```gradle
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    
+
     defaultConfig {
         applicationId "com.yourcompany.yourapp"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -107,7 +118,7 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    
+
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -124,7 +135,7 @@ android {
             }
         }
     }
-    
+
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
@@ -141,6 +152,7 @@ android {
 ### 4️⃣ **Build Debug APK**
 
 #### 🧪 Debug APK - Để Test
+
 ```bash
 # Cách 1: Qua React Native CLI
 npx react-native run-android
@@ -151,11 +163,13 @@ cd android
 ```
 
 #### 📍 Debug APK được tạo ở:
+
 ```
 android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
 #### 🎯 Đặc điểm Debug APK:
+
 - ✅ **Nhanh** để build
 - ✅ **Dễ** debug
 - ❌ **Chậm** khi chạy
@@ -165,22 +179,25 @@ android/app/build/outputs/apk/debug/app-debug.apk
 ### 5️⃣ **Build Release APK**
 
 #### 🚀 Release APK - Để Phát Hành
+
 ```bash
 cd android
 
 # Windows
 .\gradlew assembleRelease
 
-# Mac/Linux  
+# Mac/Linux
 ./gradlew assembleRelease
 ```
 
 #### 📍 Release APK được tạo ở:
+
 ```
 android/app/build/outputs/apk/release/app-release.apk
 ```
 
 #### 🎯 Đặc điểm Release APK:
+
 - ✅ **Nhanh** khi chạy
 - ✅ **Dung lượng nhỏ**
 - ✅ **Được tối ưu**
@@ -191,17 +208,20 @@ android/app/build/outputs/apk/release/app-release.apk
 ### 6️⃣ **Build App Bundle (AAB)**
 
 #### 📦 App Bundle - Cho Google Play Store
+
 ```bash
 cd android
 ./gradlew bundleRelease
 ```
 
 #### 📍 AAB được tạo ở:
+
 ```
 android/app/build/outputs/bundle/release/app-release.aab
 ```
 
 #### 🎯 Tại sao dùng AAB?
+
 - ✅ **Nhỏ hơn APK** 15-20%
 - ✅ **Google Play tự tối ưu** cho từng thiết bị
 - ✅ **Dynamic delivery** - tải từng phần khi cần
@@ -210,11 +230,13 @@ android/app/build/outputs/bundle/release/app-release.aab
 ### 7️⃣ **Ký APK (Signing)**
 
 #### 🔐 Tại sao phải ký APK?
+
 - **Android** không cài app **không có chữ ký**
 - **Chữ ký** chứng minh app **không bị sửa đổi**
 - **Google Play** chỉ nhận app **có chữ ký hợp lệ**
 
 #### ✍️ Quá trình ký tự động:
+
 ```
 📱 Your Code → 🔨 Build → 🔐 Sign → 📦 APK
 ```
@@ -224,6 +246,7 @@ android/app/build/outputs/bundle/release/app-release.aab
 #### 🗜️ Giảm dung lượng APK:
 
 **📂 Bật Proguard/R8:**
+
 ```gradle
 // android/app/build.gradle
 buildTypes {
@@ -236,6 +259,7 @@ buildTypes {
 ```
 
 **🖼️ Tối ưu hình ảnh:**
+
 ```bash
 # Chuyển PNG sang WebP (nhỏ hơn 25-35%)
 # Xóa hình không dùng
@@ -243,6 +267,7 @@ buildTypes {
 ```
 
 **📚 Tách thư viện:**
+
 ```gradle
 // Tạo APK riêng cho từng kiến trúc
 splits {
@@ -260,11 +285,13 @@ splits {
 ## 🔧 XỬ LÝ LỖI THƯỜNG GẶP
 
 ### ❌ **Lỗi 1: React Native CLI không có**
+
 ```
 ⚠️ react-native depends on @react-native-community/cli
 ```
 
 **✅ Cách sửa:**
+
 ```bash
 # Thêm vào devDependencies
 npm install --save-dev @react-native-community/cli@latest
@@ -274,11 +301,13 @@ npm install -g @react-native-community/cli
 ```
 
 ### ❌ **Lỗi 2: Android SDK không tìm thấy**
+
 ```
 > SDK location not found
 ```
 
 **✅ Cách sửa:**
+
 ```bash
 # Tạo file android/local.properties
 echo "sdk.dir=C:\\Users\\YourName\\AppData\\Local\\Android\\Sdk" > android/local.properties
@@ -288,11 +317,13 @@ export ANDROID_HOME=/path/to/android/sdk
 ```
 
 ### ❌ **Lỗi 3: Java version không đúng**
+
 ```
 > Unsupported Java version
 ```
 
 **✅ Cách sửa:**
+
 ```bash
 # Cài JDK 11 hoặc 17
 # Windows: Scoop install openjdk11
@@ -301,11 +332,13 @@ export ANDROID_HOME=/path/to/android/sdk
 ```
 
 ### ❌ **Lỗi 4: Keystore không tìm thấy**
+
 ```
 > Keystore file not found
 ```
 
 **✅ Cách sửa:**
+
 ```bash
 # Kiểm tra đường dẫn trong gradle.properties
 # Đảm bảo file keystore ở đúng vị trí
@@ -313,22 +346,26 @@ export ANDROID_HOME=/path/to/android/sdk
 ```
 
 ### ❌ **Lỗi 5: Build failed do memory**
+
 ```
 > OutOfMemoryError
 ```
 
 **✅ Cách sửa:**
+
 ```gradle
 // android/gradle.properties
 org.gradle.jvmargs=-Xmx4096m -XX:MaxPermSize=512m
 ```
 
 ### ❌ **Lỗi 6: APK quá lớn**
+
 ```
 > APK size exceeds limit
 ```
 
 **✅ Cách sửa:**
+
 ```gradle
 // Bật minify và shrink
 android {
@@ -345,11 +382,11 @@ android {
 
 ## 📊 SO SÁNH CÁC LOẠI BUILD
 
-| Loại | Thời gian build | Dung lượng | Tốc độ chạy | Dùng để |
-|------|----------------|------------|-------------|---------|
-| **Debug** | 🟢 Nhanh (1-2 phút) | 🔴 Lớn (50-100MB) | 🔴 Chậm | Test, debug |
-| **Release** | 🔴 Chậm (5-10 phút) | 🟢 Nhỏ (10-30MB) | 🟢 Nhanh | Phát hành |
-| **Bundle** | 🔴 Chậm (5-10 phút) | 🟢 Rất nhỏ (8-25MB) | 🟢 Nhanh | Google Play |
+| Loại        | Thời gian build     | Dung lượng          | Tốc độ chạy | Dùng để     |
+| ----------- | ------------------- | ------------------- | ----------- | ----------- |
+| **Debug**   | 🟢 Nhanh (1-2 phút) | 🔴 Lớn (50-100MB)   | 🔴 Chậm     | Test, debug |
+| **Release** | 🔴 Chậm (5-10 phút) | 🟢 Nhỏ (10-30MB)    | 🟢 Nhanh    | Phát hành   |
+| **Bundle**  | 🔴 Chậm (5-10 phút) | 🟢 Rất nhỏ (8-25MB) | 🟢 Nhanh    | Google Play |
 
 ---
 
@@ -380,6 +417,7 @@ android/
 ## 🎯 CHECKLIST TẠO APK
 
 ### ✅ **Trước khi build:**
+
 - [ ] Cài đặt Android SDK
 - [ ] Cài đặt JDK 11+
 - [ ] Tạo keystore
@@ -387,6 +425,7 @@ android/
 - [ ] Test app trên emulator/device
 
 ### ✅ **Khi build:**
+
 - [ ] Clean project: `./gradlew clean`
 - [ ] Build debug trước: `./gradlew assembleDebug`
 - [ ] Test debug APK
@@ -394,6 +433,7 @@ android/
 - [ ] Kiểm tra file APK được tạo
 
 ### ✅ **Sau khi build:**
+
 - [ ] Test APK trên thiết bị thật
 - [ ] Kiểm tra dung lượng file
 - [ ] Test các chức năng chính
@@ -405,6 +445,7 @@ android/
 ## 🚀 AUTOMATION BUILD
 
 ### 📜 Script tự động build:
+
 ```bash
 #!/bin/bash
 # build-apk.sh
@@ -419,7 +460,7 @@ cd android && ./gradlew clean
 echo "🧪 Building debug APK..."
 ./gradlew assembleDebug
 
-# Build release  
+# Build release
 echo "📦 Building release APK..."
 ./gradlew assembleRelease
 
@@ -430,11 +471,12 @@ echo "🎁 Building app bundle..."
 echo "✅ Build hoàn thành!"
 echo "📂 Files tạo ra:"
 echo "  Debug: android/app/build/outputs/apk/debug/app-debug.apk"
-echo "  Release: android/app/build/outputs/apk/release/app-release.apk"  
+echo "  Release: android/app/build/outputs/apk/release/app-release.apk"
 echo "  Bundle: android/app/build/outputs/bundle/release/app-release.aab"
 ```
 
 ### 🏃‍♂️ Chạy script:
+
 ```bash
 chmod +x build-apk.sh
 ./build-apk.sh
@@ -449,8 +491,9 @@ chmod +x build-apk.sh
 ### 🛠️ **Tools cần:** Android SDK + JDK + React Native CLI
 
 ### 📦 **3 loại build:**
+
 1. **Debug** - Để test (nhanh, lớn, chậm)
-2. **Release** - Để phát hành (chậm, nhỏ, nhanh)  
+2. **Release** - Để phát hành (chậm, nhỏ, nhanh)
 3. **Bundle** - Cho Google Play (nhỏ nhất)
 
 ### 🔑 **Keystore:** Chìa khóa ký APK (QUAN TRỌNG - không được mất!)

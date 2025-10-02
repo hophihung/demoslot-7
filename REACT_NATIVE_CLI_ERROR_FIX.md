@@ -6,7 +6,7 @@
 PS F:\MMA\demo_b7\slot7Demo> npx react-native run-android
 
 ⚠️ react-native depends on @react-native-community/cli for cli commands
-. To fix update your package.json to include:                          
+. To fix update your package.json to include:
 
   "devDependencies": {
     "@react-native-community/cli": "latest",
@@ -18,9 +18,11 @@ PS F:\MMA\demo_b7\slot7Demo> npx react-native run-android
 ## 🕵️ **NGUYÊN NHÂN:**
 
 ### 🎯 **Phát hiện chính:**
+
 Dự án này là **EXPO PROJECT**, không phải **bare React Native**!
 
 ### 🔍 **Bằng chứng:**
+
 ```json
 // package.json
 {
@@ -37,6 +39,7 @@ Dự án này là **EXPO PROJECT**, không phải **bare React Native**!
 ```
 
 ### 💡 **Giải thích đơn giản:**
+
 - **Bare React Native** = Xe máy (tự lắp ráp, cần nhiều tools)
 - **Expo** = Xe đạp điện (có sẵn, dễ dùng)
 - Bạn đang dùng lệnh **xe máy** cho **xe đạp điện**!
@@ -48,11 +51,13 @@ Dự án này là **EXPO PROJECT**, không phải **bare React Native**!
 ### 🥇 **GIẢI PHÁP 1: DÙNG EXPO CLI (KHUYÊN DÙNG)**
 
 #### Thay vì:
+
 ```bash
 npx react-native run-android  # ❌ Sai
 ```
 
 #### Dùng:
+
 ```bash
 expo start --android  # ✅ Đúng
 # hoặc
@@ -60,6 +65,7 @@ npm run android       # ✅ Đúng (theo package.json)
 ```
 
 #### Các lệnh Expo khác:
+
 ```bash
 expo start            # Start development server
 expo start --web      # Run on web
@@ -93,8 +99,9 @@ npx expo eject
 ```
 
 **❌ Tại sao không khuyên:**
+
 - Không thể hoàn tác
-- Mất tính đơn giản của Expo  
+- Mất tính đơn giản của Expo
 - Phức tạp hóa project
 - Không cần thiết cho demo này
 
@@ -103,11 +110,13 @@ npx expo eject
 ## 📱 **HƯỚNG DẪN CHẠY ĐÚNG**
 
 ### 🚀 **Bước 1: Cài đặt Expo CLI**
+
 ```bash
 npm install -g @expo/cli
 ```
 
 ### 📱 **Bước 2: Chạy development server**
+
 ```bash
 cd F:\MMA\demo_b7\slot7Demo
 expo start
@@ -116,15 +125,17 @@ expo start
 ### 🎯 **Bước 3: Chọn platform**
 
 Trong terminal sẽ hiện menu:
+
 ```
 › Press a │ open Android
-› Press i │ open iOS simulator  
+› Press i │ open iOS simulator
 › Press w │ open web
 › Press r │ reload app
 › Press m │ toggle menu
 ```
 
 **Cho Android:**
+
 - Nhấn `a` để mở trên Android emulator
 - Hoặc scan QR code bằng Expo Go app
 
@@ -133,6 +144,7 @@ Trong terminal sẽ hiện menu:
 ## 🔧 **TROUBLESHOOTING THÊM**
 
 ### ❌ **Lỗi: Android emulator not found**
+
 ```bash
 # Cài đặt Android Studio
 # Tạo virtual device
@@ -140,16 +152,19 @@ Trong terminal sẽ hiện menu:
 ```
 
 ### ❌ **Lỗi: Expo CLI not found**
+
 ```bash
 npm install -g @expo/cli@latest
 ```
 
 ### ❌ **Lỗi: Port 8081 is busy**
+
 ```bash
 expo start --port 8082
 ```
 
 ### ❌ **Lỗi: Can't resolve module**
+
 ```bash
 npm install
 # hoặc
@@ -163,7 +178,7 @@ expo install
 ### 🎤 **Script khi gặp lỗi:**
 
 > "Ồ, chúng ta gặp lỗi này! Đây là **teaching moment** rất hay.
-> 
+>
 > Lỗi này xảy ra vì chúng ta đang dùng **React Native CLI** cho một **Expo project**. Giống như bạn đang dùng remote TV để điều khiển máy radio vậy!
 >
 > Hãy xem cách sửa..."
@@ -177,11 +192,12 @@ npx react-native run-android  # ❌
 # Explain
 echo "This is Expo project, not bare React Native"
 
-# Show correct way  
+# Show correct way
 expo start --android  # ✅
 ```
 
 ### 📚 **Explain difference:**
+
 ```
 BARE REACT NATIVE          EXPO
 ├── android/               ├── app.json
@@ -197,14 +213,18 @@ BARE REACT NATIVE          EXPO
 ### 🎯 **APK Build Demo cần update:**
 
 #### Before:
+
 > "Chúng ta sẽ build APK bằng Gradle..."
 
-#### After:  
+#### After:
+
 > "Vì đây là Expo project, chúng ta có 2 options:
+>
 > 1. **EAS Build** (cloud build - khuyên dùng)
 > 2. **Eject** rồi build như bare RN"
 
 #### Demo simulation giữ nguyên:
+
 - Animation build process vẫn educational
 - Giải thích concepts vẫn đúng
 - Chỉ cần clarify về Expo vs bare RN
@@ -213,25 +233,27 @@ BARE REACT NATIVE          EXPO
 
 ## 📊 **COMPARISON TABLE**
 
-| Task | Bare React Native | Expo |
-|------|-------------------|------|
-| **Run Android** | `npx react-native run-android` | `expo start --android` |
-| **Build APK** | `cd android && ./gradlew assembleRelease` | `eas build --platform android` |
-| **Debug** | Chrome DevTools + Flipper | Expo DevTools |
-| **Install packages** | `npm install` | `expo install` |
-| **Eject** | Already ejected | `expo eject` |
+| Task                 | Bare React Native                         | Expo                           |
+| -------------------- | ----------------------------------------- | ------------------------------ |
+| **Run Android**      | `npx react-native run-android`            | `expo start --android`         |
+| **Build APK**        | `cd android && ./gradlew assembleRelease` | `eas build --platform android` |
+| **Debug**            | Chrome DevTools + Flipper                 | Expo DevTools                  |
+| **Install packages** | `npm install`                             | `expo install`                 |
+| **Eject**            | Already ejected                           | `expo eject`                   |
 
 ---
 
 ## 🎉 **KẾT LUẬN**
 
 ### ✅ **Bạn đã học được:**
+
 1. **Phân biệt** Expo vs bare React Native
-2. **Cách nhận biết** project type  
+2. **Cách nhận biết** project type
 3. **Sử dụng đúng** commands cho từng type
 4. **Troubleshooting** khi dùng sai tools
 
 ### 🚀 **Next steps:**
+
 ```bash
 # Chạy project đúng cách
 expo start --android
@@ -241,6 +263,7 @@ eas build --platform android --profile preview
 ```
 
 ### 💡 **Takeaway:**
+
 > "Luôn kiểm tra project type trước khi dùng commands. Expo và bare React Native có tools khác nhau!"
 
 **🎯 Giờ bạn đã biết cách fix lỗi và chạy project đúng cách rồi!**
