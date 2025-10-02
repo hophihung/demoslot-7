@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { HelloWave } from '@/components/hello-wave';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
@@ -18,60 +18,75 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">React Native Demo Slot 7</ThemedText>
         <HelloWave />
       </ThemedView>
+      
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
+        <ThemedText type="subtitle">📱 Demo Topics</ThemedText>
         <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
+          Explore React Native error handling, debugging, APK building, and app updates
         </ThemedText>
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
+      {/* Error Handling Demo */}
+      <ThemedView style={styles.demoContainer}>
+        <Link href="/demos/error-handling" style={styles.demoLink}>
+          <ThemedView style={styles.demoCard}>
+            <ThemedText type="subtitle" style={styles.demoTitle}>
+              🐛 Error Handling & Debugging
+            </ThemedText>
+            <ThemedText style={styles.demoDescription}>
+              • Error boundaries and try-catch{'\n'}
+              • Common error types{'\n'}
+              • Debugging tools{'\n'}
+              • Interactive examples
+            </ThemedText>
+          </ThemedView>
+        </Link>
       </ThemedView>
+
+      {/* APK Build Demo */}
+      <ThemedView style={styles.demoContainer}>
+        <Link href="/demos/apk-build" style={styles.demoLink}>
+          <ThemedView style={styles.demoCard}>
+            <ThemedText type="subtitle" style={styles.demoTitle}>
+              📦 Creating Android APK Files
+            </ThemedText>
+            <ThemedText style={styles.demoDescription}>
+              • Keystore generation{'\n'}
+              • Gradle configuration{'\n'}
+              • Build simulation{'\n'}
+              • Troubleshooting guide
+            </ThemedText>
+          </ThemedView>
+        </Link>
+      </ThemedView>
+
+      {/* Updates Demo */}
+      <ThemedView style={styles.demoContainer}>
+        <Link href="/demos/updates" style={styles.demoLink}>
+          <ThemedView style={styles.demoCard}>
+            <ThemedText type="subtitle" style={styles.demoTitle}>
+              🔄 Handling App Updates
+            </ThemedText>
+            <ThemedText style={styles.demoDescription}>
+              • OTA (Over-The-Air) updates{'\n'}
+              • Update strategies{'\n'}
+              • Expo Updates & CodePush{'\n'}
+              • Best practices
+            </ThemedText>
+          </ThemedView>
+        </Link>
+      </ThemedView>
+
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
+        <ThemedText type="subtitle">🎯 Demo Instructions</ThemedText>
         <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+          1. Tap any demo card above to explore{'\n'}
+          2. Each demo includes interactive examples{'\n'}
+          3. Check console logs for debugging info{'\n'}
+          4. Try different scenarios to see error handling
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
@@ -94,5 +109,26 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  demoContainer: {
+    marginBottom: 16,
+  },
+  demoLink: {
+    textDecorationLine: 'none',
+  },
+  demoCard: {
+    padding: 16,
+    borderRadius: 12,
+    backgroundColor: 'rgba(0, 122, 255, 0.1)',
+    borderWidth: 1,
+    borderColor: 'rgba(0, 122, 255, 0.3)',
+  },
+  demoTitle: {
+    marginBottom: 8,
+    color: '#007AFF',
+  },
+  demoDescription: {
+    lineHeight: 20,
+    opacity: 0.8,
   },
 });
